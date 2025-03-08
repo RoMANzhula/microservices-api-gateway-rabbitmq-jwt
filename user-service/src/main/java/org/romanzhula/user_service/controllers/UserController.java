@@ -6,10 +6,7 @@ import org.romanzhula.user_service.services.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -26,6 +23,14 @@ public class UserController {
             @RequestParam(defaultValue = "10") int size
     ) {
         return ResponseEntity.ok(userService.getAll(page, size));
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/{user-id}")
+    public ResponseEntity<UserResponse> getUserById(
+            @PathVariable("user-id") String userId
+    ) {
+        return ResponseEntity.ok(userService.getUserByUd(userId));
     }
 
 }
