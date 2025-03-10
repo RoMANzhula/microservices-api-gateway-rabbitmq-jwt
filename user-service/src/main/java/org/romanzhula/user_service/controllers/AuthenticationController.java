@@ -5,10 +5,7 @@ import org.romanzhula.user_service.controllers.requests.RegistrationRequest;
 import org.romanzhula.user_service.controllers.responses.AuthResponse;
 import org.romanzhula.user_service.services.AuthenticationService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,7 +14,7 @@ public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
 
-    @PatchMapping("/register")
+    @PostMapping("/register")
     public ResponseEntity<AuthResponse> registration(
             @RequestBody RegistrationRequest registrationRequest
     ) {
