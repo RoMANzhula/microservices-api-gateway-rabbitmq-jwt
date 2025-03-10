@@ -1,6 +1,7 @@
 package org.romanzhula.user_service.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.romanzhula.user_service.controllers.requests.LoginRequest;
 import org.romanzhula.user_service.controllers.requests.RegistrationRequest;
 import org.romanzhula.user_service.controllers.responses.AuthResponse;
 import org.romanzhula.user_service.services.AuthenticationService;
@@ -19,6 +20,13 @@ public class AuthenticationController {
             @RequestBody RegistrationRequest registrationRequest
     ) {
         return ResponseEntity.ok(authenticationService.userRegistration(registrationRequest));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(
+            @RequestBody LoginRequest loginRequest
+    ) {
+        return ResponseEntity.ok(authenticationService.login(loginRequest));
     }
 
 }
