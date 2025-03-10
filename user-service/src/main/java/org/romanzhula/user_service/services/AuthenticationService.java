@@ -1,12 +1,17 @@
 package org.romanzhula.user_service.services;
 
 import lombok.RequiredArgsConstructor;
+import org.romanzhula.user_service.configurations.security.implementations.UserDetailsImpl;
 import org.romanzhula.user_service.configurations.security.jwt.JWTService;
+import org.romanzhula.user_service.controllers.requests.LoginRequest;
 import org.romanzhula.user_service.controllers.requests.RegistrationRequest;
 import org.romanzhula.user_service.controllers.responses.AuthResponse;
 import org.romanzhula.user_service.models.User;
 import org.romanzhula.user_service.models.enums.UserRole;
 import org.romanzhula.user_service.repositories.UserRepository;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +24,7 @@ public class AuthenticationService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JWTService jwtService;
+    private final AuthenticationManager authenticationManager;
 
 
     @Transactional
@@ -37,6 +43,27 @@ public class AuthenticationService {
         userRepository.save(newUser);
 
         var jwtToken = jwtService.generateToken((UserDetails) newUser);
+
+        return AuthResponse.builder()
+                .token(jwtToken)
+                .build()
+        ;
+    }
+
+    @Transactional
+    public AuthResponse login(LoginRequest loginRequest) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getUsername(),
+                        loginRequest.getPassword()
+                )
+        );
+
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        // or we can get data about User from DAO
+        // User logUser = userRepository.findByUsername(loginRequest.getUsername()).orElseThrow();
+
+        String jwtToken = jwtService.generateToken(userDetails);
 
         return AuthResponse.builder()
                 .token(jwtToken)
