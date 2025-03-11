@@ -9,6 +9,7 @@ import org.romanzhula.user_service.controllers.responses.AuthResponse;
 import org.romanzhula.user_service.models.User;
 import org.romanzhula.user_service.models.enums.UserRole;
 import org.romanzhula.user_service.repositories.UserRepository;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,6 +26,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JWTService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final RabbitTemplate rabbitTemplate;
 
 
     @Transactional
@@ -41,6 +43,8 @@ public class AuthenticationService {
         ;
 
         userRepository.save(newUser);
+
+        rabbitTemplate.convertAndSend("user-created-queue", newUser);
 
         var jwtToken = jwtService.generateToken((UserDetails) newUser);
 
