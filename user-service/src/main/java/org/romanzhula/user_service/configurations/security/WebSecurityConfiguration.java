@@ -1,14 +1,13 @@
 package org.romanzhula.user_service.configurations.security;
 
 import lombok.RequiredArgsConstructor;
+import org.romanzhula.microservices_common.security.jwt.AuthEntryPointJwt;
+import org.romanzhula.microservices_common.security.jwt.AuthJWTFilter;
 import org.romanzhula.user_service.configurations.ApplicationConfiguration;
 import org.romanzhula.user_service.configurations.security.cors.CorsAutoConfiguration;
 import org.romanzhula.user_service.configurations.security.cors.EnableCORS;
-import org.romanzhula.user_service.configurations.security.filters.AuthJWTFilter;
-import org.romanzhula.user_service.configurations.security.jwt.AuthEntryPointJwt;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;

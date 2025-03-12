@@ -1,8 +1,8 @@
 package org.romanzhula.user_service.services;
 
 import lombok.RequiredArgsConstructor;
-import org.romanzhula.user_service.configurations.security.implementations.UserDetailsImpl;
-import org.romanzhula.user_service.configurations.security.jwt.JWTService;
+import org.romanzhula.microservices_common.security.jwt.CommonJWTService;
+import org.romanzhula.microservices_common.security.implementations.UserDetailsImpl;
 import org.romanzhula.user_service.controllers.requests.LoginRequest;
 import org.romanzhula.user_service.controllers.requests.RegistrationRequest;
 import org.romanzhula.user_service.controllers.responses.AuthResponse;
@@ -24,7 +24,7 @@ public class AuthenticationService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final JWTService jwtService;
+    private final CommonJWTService jwtService;
     private final AuthenticationManager authenticationManager;
     private final RabbitTemplate rabbitTemplate;
 
