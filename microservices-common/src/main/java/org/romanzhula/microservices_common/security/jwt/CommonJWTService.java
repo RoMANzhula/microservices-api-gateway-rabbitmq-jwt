@@ -65,14 +65,14 @@ public class CommonJWTService {
         ;
     }
 
-    public boolean isTokenValid(String jwtToken, UserDetails userDetails) {
+    public boolean isTokenValid(String jwtToken, String username) {
         var usernameFromToken = extractUsernameFromToken(jwtToken);
 
         if (isTokenExpired(jwtToken)) {
             throw new InvalidTokenException("JWT token has expired");
         }
 
-        return usernameFromToken.equals(userDetails.getUsername()) && !isTokenExpired(jwtToken);
+        return usernameFromToken.equals(username) && !isTokenExpired(jwtToken);
     }
 
     private boolean isTokenExpired(String jwtToken) {
