@@ -1,5 +1,6 @@
 package org.romanzhula.microservices_common.security.implementations;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +13,7 @@ public class UserDetailsImpl implements UserDetails {
     @Getter
     private final String id;
     private final String username;
+    @JsonIgnore
     private final String password;
     private final Collection<? extends GrantedAuthority> authorities;
 
