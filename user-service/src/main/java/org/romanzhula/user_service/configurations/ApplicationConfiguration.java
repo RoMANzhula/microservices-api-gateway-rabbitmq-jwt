@@ -1,6 +1,7 @@
 package org.romanzhula.user_service.configurations;
 
 import lombok.RequiredArgsConstructor;
+import org.romanzhula.microservices_common.security.CustomUserDetailsService;
 import org.romanzhula.microservices_common.security.jwt.AuthEntryPointJwt;
 import org.romanzhula.microservices_common.security.jwt.AuthJWTFilter;
 import org.romanzhula.microservices_common.security.jwt.CommonJWTService;
@@ -56,8 +57,8 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    public AuthJWTFilter authJWTFilter() {
-        return new AuthJWTFilter();
+    public AuthJWTFilter authJWTFilter(CommonJWTService jwtService, CustomUserDetailsService userDetailsService) {
+        return new AuthJWTFilter(jwtService, userDetailsService);
     }
 
     @Bean
