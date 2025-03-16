@@ -2,6 +2,7 @@ package org.romanzhula.user_service.services;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.romanzhula.user_service.controllers.responses.UserFeignResponse;
 import org.romanzhula.user_service.controllers.responses.UserResponse;
 import org.romanzhula.user_service.repositories.UserRepository;
 import org.springframework.data.domain.Page;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.UUID;
 
 
@@ -36,7 +38,7 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public UserResponse getUserByUd(String userId) {
+    public UserResponse getUserById(String userId) {
         return userRepository.findById(UUID.fromString(userId))
                 .map(user -> new UserResponse(
                         user.getId(),
@@ -47,6 +49,19 @@ public class UserService {
                         user.getPhone()
                 ))
                 .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId))
+        ;
+    }
+
+    @Transactional(readOnly = true)
+    public UserFeignResponse getUserByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .map(user -> new UserFeignResponse(
+                        user.getId().toString(),
+                        user.getUsername(),
+                        user.getPassword(),
+                        Collections.singleton(user.getRole().toString())
+                ))
+                .orElseThrow(() -> new EntityNotFoundException("User not found with username: " + username))
         ;
     }
 
