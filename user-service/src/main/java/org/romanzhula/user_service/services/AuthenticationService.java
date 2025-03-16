@@ -1,8 +1,8 @@
 package org.romanzhula.user_service.services;
 
 import lombok.RequiredArgsConstructor;
-import org.romanzhula.microservices_common.security.jwt.CommonJWTService;
 import org.romanzhula.microservices_common.security.implementations.UserDetailsImpl;
+import org.romanzhula.microservices_common.security.jwt.CommonJWTService;
 import org.romanzhula.user_service.controllers.requests.LoginRequest;
 import org.romanzhula.user_service.controllers.requests.RegistrationRequest;
 import org.romanzhula.user_service.controllers.responses.AuthResponse;
@@ -13,10 +13,11 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -46,7 +47,14 @@ public class AuthenticationService {
 
         rabbitTemplate.convertAndSend("user-created-queue", newUser);
 
-        var jwtToken = jwtService.generateToken((UserDetails) newUser);
+        var userDetails = new UserDetailsImpl(
+                newUser.getId().toString(),
+                newUser.getUsername(),
+                newUser.getPassword(),
+                List.of(newUser.getRole().name())
+        );
+
+        var jwtToken = jwtService.generateToken(userDetails);
 
         return AuthResponse.builder()
                 .token(jwtToken)
