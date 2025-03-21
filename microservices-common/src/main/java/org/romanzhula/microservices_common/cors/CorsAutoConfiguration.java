@@ -46,7 +46,7 @@ public class CorsAutoConfiguration {
             return allowedOrigins;
         }
 
-        return Collections.singletonList(allowedOrigin); // "*" - for all
+        return Collections.singletonList("*"); // "*" - for all; allowedOrigin - for client side(frontend)
     }
 
     private List<String> getAllowedHeaders() {
