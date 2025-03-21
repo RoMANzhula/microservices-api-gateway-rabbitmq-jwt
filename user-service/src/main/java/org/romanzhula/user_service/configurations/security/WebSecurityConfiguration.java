@@ -1,10 +1,10 @@
 package org.romanzhula.user_service.configurations.security;
 
 import lombok.RequiredArgsConstructor;
+import org.romanzhula.microservices_common.cors.CorsAutoConfiguration;
+import org.romanzhula.microservices_common.cors.EnableCORS;
 import org.romanzhula.microservices_common.security.jwt.AuthEntryPointJwt;
 import org.romanzhula.microservices_common.security.jwt.AuthJWTFilter;
-import org.romanzhula.user_service.configurations.security.cors.CorsAutoConfiguration;
-import org.romanzhula.user_service.configurations.security.cors.EnableCORS;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -40,6 +40,7 @@ public class WebSecurityConfiguration {
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(
                                 "/api/v1/auth/**",
+                                "/api/v1/users/by-username",
                                 "/img/**",
                                 "/css/**",
                                 "/js/**"
@@ -53,7 +54,7 @@ public class WebSecurityConfiguration {
                                 "/proxy/**",
                                 "/webjars/**"
                         ).permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
