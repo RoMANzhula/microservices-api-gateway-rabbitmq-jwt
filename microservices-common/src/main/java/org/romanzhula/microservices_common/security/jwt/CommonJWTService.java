@@ -24,6 +24,12 @@ public class CommonJWTService {
     @Value("${app.jwt_secret_code}")
     private String jwtSecretCode;
 
+    private final String secretKey;
+
+    public CommonJWTService(String secret) {
+        this.secretKey = jwtSecretCode;
+    }
+
 
     public String generateToken(UserDetails userDetails) {
         Instant issuedAt = LocalDateTime.now().toInstant(ZoneOffset.UTC);
