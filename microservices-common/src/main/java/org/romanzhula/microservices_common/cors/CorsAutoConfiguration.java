@@ -1,4 +1,4 @@
-package org.romanzhula.user_service.configurations.security.cors;
+package org.romanzhula.microservices_common.cors;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -81,7 +81,7 @@ public class CorsAutoConfiguration {
         return Arrays.stream(HttpMethod.values())
                 .map(HttpMethod::name)
                 .collect(Collectors.toList())
-        ;
+                ;
     }
 
 }

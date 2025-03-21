@@ -1,4 +1,4 @@
-package org.romanzhula.user_service.configurations.security.cors;
+package org.romanzhula.microservices_common.cors;
 
 import org.springframework.context.annotation.Import;
 
