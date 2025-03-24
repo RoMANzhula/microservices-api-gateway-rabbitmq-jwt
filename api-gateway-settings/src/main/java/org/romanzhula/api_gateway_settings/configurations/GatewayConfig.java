@@ -34,11 +34,18 @@ public class GatewayConfig {
     public RouterFunction<ServerResponse> userRoutes() {
         return GatewayRouterFunctions.route("user-service-route")
                 .GET("/api/v1/users/**", http("http://localhost:8081"))
-                .POST("/api/v1/auth", http("http://localhost:8081"))
+                .POST("/api/v1/auth/**", http("http://localhost:8081"))
                 .build();
     }
 
-
+    @Bean
+    public RouterFunction<ServerResponse> walletRoutes() {
+        return GatewayRouterFunctions.route("wallet-service-route")
+                .GET("/api/v1/wallets/**", http("http://localhost:8082"))
+                .POST("/api/v1/wallets/**", http("http://localhost:8082"))
+                .PATCH("/api/v1/wallets/**", http("http://localhost:8082"))
+                .build();
+    }
 
 
                             // COMMON CONFIGURATIONS
