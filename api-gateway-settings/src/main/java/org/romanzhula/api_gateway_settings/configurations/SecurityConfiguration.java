@@ -45,7 +45,7 @@ public class SecurityConfiguration {
                                 "/css/**",
                                 "/js/**"
                         ).permitAll()
-                        .anyRequest().permitAll()
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
