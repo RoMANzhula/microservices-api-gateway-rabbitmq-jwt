@@ -47,6 +47,13 @@ public class GatewayConfig {
                 .build();
     }
 
+    @Bean
+    public RouterFunction<ServerResponse> expensesRoutes() {
+        return GatewayRouterFunctions.route("expenses-service-route")
+                .GET("/api/v1/expenses/**", http("http://localhost:8084"))
+                .build();
+    }
+
 
                             // COMMON CONFIGURATIONS
     @Bean
