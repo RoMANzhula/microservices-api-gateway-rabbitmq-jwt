@@ -35,7 +35,8 @@ public class GatewayConfig {
         return GatewayRouterFunctions.route("user-service-route")
                 .GET("/api/v1/users/**", http("http://localhost:8081"))
                 .POST("/api/v1/auth/**", http("http://localhost:8081"))
-                .build();
+                .build()
+        ;
     }
 
     @Bean
@@ -44,14 +45,24 @@ public class GatewayConfig {
                 .GET("/api/v1/wallets/**", http("http://localhost:8082"))
                 .POST("/api/v1/wallets/**", http("http://localhost:8082"))
                 .PATCH("/api/v1/wallets/**", http("http://localhost:8082"))
-                .build();
+                .build()
+        ;
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> journalRoutes() {
+        return GatewayRouterFunctions.route("journal-service-route")
+                .GET("/api/v1/journals/**", http("http://localhost:8083"))
+                .build()
+        ;
     }
 
     @Bean
     public RouterFunction<ServerResponse> expensesRoutes() {
         return GatewayRouterFunctions.route("expenses-service-route")
                 .GET("/api/v1/expenses/**", http("http://localhost:8084"))
-                .build();
+                .build()
+        ;
     }
 
 
