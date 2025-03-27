@@ -37,8 +37,12 @@ This project demonstrates the capabilities of **Spring Cloud** for applications 
 ## **Postman Endpoints Testing**
 
 ### 1. USER-SERVICE
-**addNewUser():**  
-POST    `http://localhost:8081/api/v1/users/add`  
+**addNewUser():**
+POST `http://localhost:8081/api/v1/users/add`
+**Headers:**
+```
+Authorization: Bearer <your_token_here>
+```
 **Body -> raw:**
 ```json
 {
@@ -50,24 +54,48 @@ POST    `http://localhost:8081/api/v1/users/add`
 }
 ```
 
-**getUserById(userId):**  
-GET     `http://localhost:8081/api/v1/users/1996395b-6e65-40a3-8d87-4e6ac3549f5e`
+**getUserById(userId):**
+GET `http://localhost:8081/api/v1/users/1996395b-6e65-40a3-8d87-4e6ac3549f5e`
+**Headers:**
+```
+Authorization: Bearer <your_token_here>
+```
 
-**getAll():**  
-GET     `http://localhost:8081/api/v1/users/all`
+**getAll():**
+GET `http://localhost:8081/api/v1/users/all`
+**Headers:**
+```
+Authorization: Bearer <your_token_here>
+```
 
 ### 2. WALLET-SERVICE
-**getAll():**  
-GET     `http://localhost:8082/api/v1/wallets/all`
+**getAll():**
+GET `http://localhost:8082/api/v1/wallets/all`
+**Headers:**
+```
+Authorization: Bearer <your_token_here>
+```
 
-**getWalletById():**  
-GET     `http://localhost:8082/api/v1/wallets/3b15ecb4-815b-4d1b-9cdd-b63854a1fe21`
+**getWalletById():**
+GET `http://localhost:8082/api/v1/wallets/3b15ecb4-815b-4d1b-9cdd-b63854a1fe21`
+**Headers:**
+```
+Authorization: Bearer <your_token_here>
+```
 
-**getBalanceByWalletId():**  
-GET     `http://localhost:8082/api/v1/wallets/3b15ecb4-815b-4d1b-9cdd-b63854a1fe21/balance`
+**getBalanceByWalletId():**
+GET `http://localhost:8082/api/v1/wallets/3b15ecb4-815b-4d1b-9cdd-b63854a1fe21/balance`
+**Headers:**
+```
+Authorization: Bearer <your_token_here>
+```
 
-**replenishBalance():**  
-POST    `http://localhost:8082/api/v1/wallets/up-balance`  
+**replenishBalance():**
+POST `http://localhost:8082/api/v1/wallets/up-balance`
+**Headers:**
+```
+Authorization: Bearer <your_token_here>
+```
 **Body -> raw:**
 ```json
 {
@@ -76,8 +104,12 @@ POST    `http://localhost:8082/api/v1/wallets/up-balance`
 }
 ```
 
-**deductBalance():**  
-PATCH   `http://localhost:8082/api/v1/wallets/deduct-balance`  
+**deductBalance():**
+PATCH `http://localhost:8082/api/v1/wallets/deduct-balance`
+**Headers:**
+```
+Authorization: Bearer <your_token_here>
+```
 **Body -> raw:**
 ```json
 {
@@ -87,13 +119,26 @@ PATCH   `http://localhost:8082/api/v1/wallets/deduct-balance`
 ```
 
 ### 3. EXPENSES-SERVICE
-**getAllExpensesByUserId():**  
-GET     `http://localhost:8084/api/v1/expenses/3b15ecb4-815b-4d1b-9cdd-b63854a1fe21`
+**getAllExpensesByUserId():**
+GET `http://localhost:8084/api/v1/expenses/3b15ecb4-815b-4d1b-9cdd-b63854a1fe21`
+**Headers:**
+```
+Authorization: Bearer <your_token_here>
+```
 
 ### 4. JOURNAL-SERVICE
-**getAllEntries():**  
-GET     `http://localhost:8083/api/v1/journal/all`
+**getAllEntries():**
+GET `http://localhost:8083/api/v1/journal/all`
+**Headers:**
+```
+Authorization: Bearer <your_token_here>
+```
 
-**getAllUserJournalEntries():**  
-GET     `http://localhost:8083/api/v1/journal/3b15ecb4-815b-4d1b-9cdd-b63854a1fe21`
+**getAllUserJournalEntries():**
+GET `http://localhost:8083/api/v1/journal/3b15ecb4-815b-4d1b-9cdd-b63854a1fe21`
+**Headers:**
+```
+Authorization: Bearer <your_token_here>
+```
+
 
